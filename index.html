@@ -107,6 +107,19 @@ body{align-items:flex-start}
 #lkopen{padding:10px;font-size:15px;background:#b8860b}
 .lock{padding:0;background:none;box-shadow:none}
 #lkov .lkrow textarea{height:44px}
+
+html,body{min-height:100%}
+.app{display:flex;flex-direction:column;min-height:100vh;min-height:100dvh;box-sizing:border-box}
+.app>.box{flex:1 1 auto;max-height:120px;align-items:center}
+.app>.box.duo>div{display:flex;flex-direction:column;justify-content:center}
+.app>.box.res{max-height:130px}
+.app>.chan{margin-top:auto}
+.app>.top{flex:0 0 auto}
+.app>.box:not(.duo){align-items:stretch;padding-top:6px;padding-bottom:6px}
+.app>.box>label{align-self:center}
+.app>.box .ex{align-self:stretch}
+.app>.box.duo>div>output{flex:1 1 auto;max-height:64px}
+.app>.box.res output{flex:1}
 </style>
 <script src="imgs1.js"></script>
 <script src="imgs2.js"></script>
