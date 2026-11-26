@@ -91,6 +91,22 @@ body{align-items:flex-start}
 #exov .exin{background:#fff;border-radius:12px;padding:10px;width:100%;max-width:460px;margin:0 auto}
 #exov .btn{margin:0 0 8px}
 #explain{margin-top:0}
+
+.lock{padding:6px 8px}.lock p.lk{margin:0 0 4px;font-size:13px;font-weight:700;color:#2f5a78}
+.lkrow{display:flex;gap:6px;margin:4px 0;align-items:stretch}
+.lkrow .code{flex:1;margin:0;padding:6px 4px;font-size:17px;letter-spacing:1px}
+.lkrow .btn{width:auto;flex:0 0 auto;margin:0;padding:6px 12px;font-size:14px}
+.lkrow textarea{flex:1;min-height:0;height:38px;padding:6px;font-size:13px;resize:none}
+.lock>.btn{margin:0;padding:7px;font-size:14px}
+
+#lkov{position:fixed;left:0;top:0;right:0;bottom:0;background:rgba(10,25,40,.6);z-index:40;overflow:auto;padding:10px}
+#lkov .exin{background:#fff;border-radius:12px;padding:10px;width:100%;max-width:460px;margin:0 auto;text-align:center}
+#lkov .lk{font-size:14px;margin:6px 0}
+#lkov .code{font-size:20px}
+#lkov .xb{margin:0 0 6px}
+#lkopen{padding:10px;font-size:15px;background:#b8860b}
+.lock{padding:0;background:none;box-shadow:none}
+#lkov .lkrow textarea{height:44px}
 </style>
 <script src="imgs1.js"></script>
 <script src="imgs2.js"></script>
@@ -149,18 +165,15 @@ body{align-items:flex-start}
     </div>
     <small id="toolmsg" style="color:#a33"></small>
   </div>
-  <div id="lock" class="lock">
-    <h3>&#128274; النتيجة مقفولة</h3>
-    <p>ابعت كود الجهاز ده لرمضان الغمراوى وهيبعتلك السيريال:</p>
-    <div class="code" id="devcode">-</div>
-    <button class="btn alt" id="copycode" type="button">نسخ الكود</button>
+  <div id="lock" class="lock"><button class="btn" id="lkopen" type="button">&#128274; النتيجة مقفولة، اضغط هنا للتفعيل</button></div>
+  <div id="lkov" hidden><div class="exin"><button class="btn xb" id="lkclose" type="button">&#10005; إغلاق</button>
+    <p class="lk">&#128274; النتيجة مقفولة. ابعت الكود ده ل <bdi dir="ltr">@Drramadan93</bdi></p>
+    <div class="lkrow"><div class="code" id="devcode">-</div><button class="btn alt" id="copycode" type="button">نسخ الكود</button></div>
     <a id="contactbtn" class="btn" target="_blank" rel="noopener noreferrer" href="https://t.me/Drramadan93" dir="ltr" style="display:block;text-align:center;text-decoration:none;background:#229ED9;color:#fff;unicode-bidi:isolate">💬 @Drramadan93</a>
-    <div id="copystatus" style="min-height:22px;margin-top:6px;font-size:14px"></div>
-    <p>الصق السيريال هنا:</p>
-    <textarea id="serial" spellcheck="false" autocomplete="off" autocapitalize="off"></textarea>
-    <button class="btn" id="unlock" type="button">فتح</button>
-    <p id="lockmsg" style="color:#a33;min-height:18px"></p>
-  </div>
+    <div id="copystatus" style="min-height:0;font-size:12px"></div>
+    <div class="lkrow"><textarea id="serial" rows="1" placeholder="الصق السيريال هنا" spellcheck="false" autocomplete="off" autocapitalize="off"></textarea><button class="btn" id="unlock" type="button">فتح</button></div>
+    <p id="lockmsg" style="color:#a33;min-height:0;margin:2px 0 0"></p>
+  </div></div>
   <p id="hint"></p>
   <div class="chan"><small>Telegram channel</small><h1>Basics of Ultrasonography</h1><a href="https://t.me/+b0JsgqNmv5U4NjZk" target="_blank" rel="noopener noreferrer" class="btn" style="display:inline-block;width:auto;margin-top:2px;text-decoration:none;padding:10px 16px;background:#2f7f6f">📢 للدخول لقناة شرح السونار</a></div>
   <div class="by">By Ramadan Elghmrawy &middot; v2</div>
@@ -367,7 +380,7 @@ function update(){
   $("range").textContent = b ? fu(b[0]) + " - " + fu(b[1]) + " " + UN : "any";
   $("hint").textContent = "";
   var msg = $("msg"); msg.textContent = "";
-  $("lock").hidden = UNLOCKED; $("tools").hidden = !UNLOCKED; LAST = null;
+  $("lock").hidden = UNLOCKED; if(UNLOCKED) $("lkov").hidden=true; $("tools").hidden = !UNLOCKED; LAST = null;
   $("months").textContent = "-"; $("result").textContent = "-";
   var notes=[], key=sp+":"+name;
   if (sp === "buffalo"){
@@ -402,6 +415,9 @@ $("explainBtn").addEventListener("click", function(){ showExplain(); $("exov").h
 $("exclose").addEventListener("click", function(){ $("exov").hidden=true; });
 $("exov").addEventListener("click", function(e){ if(e.target===$("exov")) $("exov").hidden=true; });
 $("caseToggle").addEventListener("click", function(){ var w=$("caseWrap"); w.hidden=!w.hidden; $("caseToggle").innerHTML=(w.hidden?"&#128104;&#8205;&#9877;&#65039; \u0628\u064A\u0627\u0646\u0627\u062A \u0627\u0644\u0637\u0628\u064A\u0628 \u0648\u0627\u0644\u062D\u0627\u0644\u0629 &#9662;":"&#128104;&#8205;&#9877;&#65039; \u0628\u064A\u0627\u0646\u0627\u062A \u0627\u0644\u0637\u0628\u064A\u0628 \u0648\u0627\u0644\u062D\u0627\u0644\u0629 &#9652;"); });
+$("lkopen").addEventListener("click", function(){ $("lkov").hidden=false; });
+$("lkclose").addEventListener("click", function(){ $("lkov").hidden=true; });
+$("result").addEventListener("click", function(){ if(!UNLOCKED) $("lkov").hidden=false; });
 fill();
 $("devcode").textContent = DEV;
 $("contactbtn").href = "https://t.me/Drramadan93?text=" + encodeURIComponent("كود الجهاز: " + DEV);
@@ -571,4 +587,4 @@ update();
 try{ if("serviceWorker" in navigator && /^https?:$/.test(location.protocol)) navigator.serviceWorker.register("sw.js"); }catch(e){}
 </script>
 </body>
-</html>
+  </html>
